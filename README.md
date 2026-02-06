@@ -11,6 +11,14 @@ Pilote Automatique is an Arduino-based autopilot project for a sailboat. It comb
   - **apparent wind angle follow** (`awa_sp`).
 - Logs experiment data to CSV via the Python app bridge.
 
+## Hardware
+
+- Runs on Arduino UNO Q (if you don't want to log data, a classic Arduino UNO can make it through i guess).
+- Uses the Adafruit PWM servo shield to control the rudder servo via I2C
+- Adafruit GPS Breakout for the GPS (not needed for the control, thus nice to plot paths after an experiment)
+- Adafruit IMU Fusion Breakout to measure the heading
+- Custom 3D printed Windvane (a simple low friction potentiometer put on the top of the mast)
+
 ## Repository layout
 
 ```text
@@ -82,6 +90,7 @@ It also snapshots `sketch/CONFIG.h` into the top of each file so every experimen
 - `full_unmanned_mode = true` compiles a simplified loop focused on remote rudder commands.
 - In normal mode (`false`), all sensors and logging are active.
 - Start with conservative gain (`Kp`) and validate behavior in controlled conditions before open-water testing.
+
 
 ## License
 
