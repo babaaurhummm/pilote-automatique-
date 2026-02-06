@@ -1,0 +1,17 @@
+profiles:
+  default:
+    fqbn: 
+    platforms:
+      - platform: arduino:zephyr
+    libraries:
+      - Adafruit GPS Library (1.7.5)
+      - Adafruit BNO08x (1.2.5)
+      - dependency: Adafruit BusIO (1.17.4)
+      - dependency: Adafruit Unified Sensor (1.1.15)
+      - Adafruit PWM Servo Driver Library (3.0.2)
+      - dependency: ArxContainer (0.7.0)
+      - dependency: ArxTypeTraits (0.3.2)
+      - dependency: DebugLog (0.8.4)
+      - MsgPack (0.4.2)
+
+default_profile: default
