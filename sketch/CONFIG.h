@@ -13,6 +13,7 @@ constexpr int PIN_MODE_CONTROL = 3;
 
 constexpr int pwm_mode_treshold = 1500;
 constexpr int pwm_rudder_center = 1500;
+constexpr unsigned long com_pulse_timeout_us = 3000;
 
 constexpr int ADC_rudder_center = 512;
 constexpr int ADC_rudder_range = 1023;
@@ -29,6 +30,10 @@ constexpr bool EMAfilter = true;
 constexpr float alpha_EMA = 0.2f;
 
 constexpr float Kp = 1.0f;
+
+constexpr unsigned int loop_frequency_hz = 25;
+static_assert(loop_frequency_hz >= 20 && loop_frequency_hz <= 50,
+              "loop_frequency_hz must stay between 20 and 50 Hz");
 
 constexpr bool full_unmanned_mode = false ;
 constexpr bool awa_follow_mode = false; //true : suivi de d'allure ; false : suivi de cap

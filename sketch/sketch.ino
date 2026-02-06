@@ -14,6 +14,19 @@ RUDDER rudder;
 WINDSENSOR windsensor;
 DATA data;
 
+const unsigned long loop_period_ms = 1000UL / loop_frequency_hz;
+
+void wait_until_next_loop() {
+  static unsigned long last_loop_start = millis();
+  const unsigned long now = millis();
+  const unsigned long elapsed = now - last_loop_start;
+
+  if (elapsed < loop_period_ms) {
+    delay(loop_period_ms - elapsed);
+  }
+
+  last_loop_start = millis();
+}
 
 #if full_unmanned_mode
 
@@ -25,6 +38,7 @@ void setup() {
 
 void loop() {
   rudder.set_rudder_angle(com.get_com_rudder());
+  wait_until_next_loop();
 }
 
 #else
@@ -57,6 +71,7 @@ void loop() {
     rudder.set_rudder_angle(com.get_com_rudder());
   }
 
+  wait_until_next_loop();
 }
 
 void update() {
