@@ -31,7 +31,6 @@ void wait_until_next_loop() {
 #if full_unmanned_mode
 
 void setup() {
-  Bridge.begin();
   com.init();
   rudder.init();
 }
@@ -44,6 +43,8 @@ void loop() {
 #else
 
 void setup() {
+  delay(20000);
+  Monitor.begin();
   Bridge.begin();
   com.init();
   imu.init();

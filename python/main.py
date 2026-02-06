@@ -5,7 +5,7 @@ from pathlib import Path
 
 from arduino.app_utils import App, Bridge
 
-DATA_DIR = Path("/home/data")
+DATA_DIR = Path("/home/arduino/data")
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 CONFIG_PATH = Path(__file__).resolve().parents[1] / "sketch" / "CONFIG.h"
 
@@ -91,9 +91,4 @@ def log_data(
 Bridge.provide("log_data", log_data)
 
 
-def loop():
-    """This function is called repeatedly by the App framework."""
-    time.sleep(1)
-
-
-App.run(user_loop=loop)
+App.run()
