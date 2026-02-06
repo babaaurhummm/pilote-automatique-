@@ -27,8 +27,8 @@ void COM::init() {
 }
 
 void COM::update() {
-  rudder_value = pulseIn(PIN_COM_RUDDER, HIGH, 25000);
-  mode_control_value = pulseIn(PIN_MODE_CONTROL, HIGH, 25000);
+  rudder_value = pulseIn(PIN_COM_RUDDER, HIGH, com_pulse_timeout_us);
+  mode_control_value = pulseIn(PIN_MODE_CONTROL, HIGH, com_pulse_timeout_us);
 
   if (mode_control_value < pwm_mode_treshold) {
     unmanned_status = true;
