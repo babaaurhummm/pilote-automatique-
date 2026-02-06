@@ -1,12 +1,40 @@
 import csv
+import os
 import time
 from datetime import datetime
 from pathlib import Path
 
 from arduino.app_utils import App, Bridge
 
-DATA_DIR = Path("/home/data")
-DATA_DIR.mkdir(parents=True, exist_ok=True)
+def _resolve_data_dir() -> Path:
+    candidates: list[Path] = []
+
+    env_data_dir = os.getenv("DATA_DIR")
+    if env_data_dir:
+        candidates.append(Path(env_data_dir))
+
+    candidates.extend(
+        [
+            Path("/home/data"),
+            Path(__file__).resolve().parents[1] / "data",
+            Path("/tmp/pilote-automatique-data"),
+        ]
+    )
+
+    for candidate in candidates:
+        try:
+            candidate.mkdir(parents=True, exist_ok=True)
+            return candidate
+        except PermissionError:
+            continue
+
+    raise PermissionError(
+        "Unable to create a writable data directory. "
+        "Set DATA_DIR to a writable path."
+    )
+
+
+DATA_DIR = _resolve_data_dir()
 CONFIG_PATH = Path(__file__).resolve().parents[1] / "sketch" / "CONFIG.h"
 
 
