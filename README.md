@@ -96,3 +96,11 @@ It also snapshots `sketch/CONFIG.h` into the top of each file so every experimen
 ## License
 
 No license file is currently provided in this repository.
+
+
+Usefull links : 
+
+-Arduino Uno Q User Manual (useful to understand how the Arduino Uno Q works)
+https://docs.arduino.cc/tutorials/uno-q/user-manual/
+-Arduino App CLI (to understand how an Arduino Uno Q app runs)
+https:://github.com/arduino/arduino-app-cli 
