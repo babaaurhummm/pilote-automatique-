@@ -1,6 +1,6 @@
 # ⛵ Pilote Automatique
 
-Pilote Automatique is an Arduino-based autopilot project for a sailboat. It combines onboard sensors (GPS, IMU, wind sensor), rudder control, and a Python bridge for data logging.
+Pilote Automatique is an Arduino-based autopilot TIPE project for a sailboat. It combines onboard sensors (GPS, IMU, wind sensor), rudder control, and a Python bridge for data logging. Feel free to read the MCOT (French), it explains some details about the whys of the project.
 
 ## What this project does
 
