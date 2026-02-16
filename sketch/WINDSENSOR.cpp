@@ -5,7 +5,7 @@
 
 WINDSENSOR::WINDSENSOR() {
     ADC_awa_value = 0u;
-    awa = 0u;
+    awa = 0;
 }
 
 
@@ -35,6 +35,6 @@ void WINDSENSOR::update() {
 }
 
 
-uint16_t WINDSENSOR::get_awa() {
+int16_t WINDSENSOR::get_awa() {
   return awa;
 }
