@@ -13,7 +13,7 @@ void DATA::save_data(unsigned long timestamp,
                      float longitude,
                      uint16_t heading,
                      int16_t rudder_angle,
-                     int16_t awa,
+                     uint16_t awa,
                      bool unmanned_status) {
     Bridge.notify("log_data",
                   timestamp,

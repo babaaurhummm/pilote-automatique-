@@ -36,7 +36,7 @@ constexpr bool full_unmanned_mode = false ;
 constexpr bool awa_follow_mode = false; //true : suivi de d'allure ; false : suivi de cap
 
 constexpr uint16_t heading_sp = 0;
-constexpr int16_t awa_sp = 0;
+constexpr uint16_t awa_sp = 0;
 
 
 #endif
