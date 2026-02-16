@@ -85,30 +85,27 @@ void update() {
 
 void save_data() {
   GPScoord point = gps.get_point();
-  float heading = imu.get_heading();
-  float r_angle = rudder.get_rudder_angle();
-  uint16_t awa = windsensor.get_awa();
+  const uint16_t heading = imu.get_heading();
+  const int16_t r_angle = rudder.get_rudder_angle();
+  int16_t awa = windsensor.get_awa();
   bool unmanned_status = com.is_unmanned();
   data.save_data(millis(), point.lat, point.lng, heading, r_angle, awa, unmanned_status);
 }
 
 #if awa_follow_mode
 
-int rudder_angle_sp(int awa_sp) {
-  const uint16_t awa = windsensor.get_awa();
-  const float heading = imu.get_heading();
-  const float heading_sp = awa_sp - awa + heading ;
-  const float e = heading_sp - heading ;
-  return Kp*e;
+int rudder_angle_sp(int16_t awa_sp) {
+  const int16_t awa = windsensor.get_awa();
+  const int16_t e = awa_sp - awa;
+  return Kp * e;
   
 }
 
 #else
 
 int rudder_angle_sp(int heading_sp) {
-  const float heading = imu.get_heading();
-  const float e = heading_sp - heading ;
-  return Kp*e;
+  const int16_t e = static_cast<int16_t>(heading_sp) - static_cast<int16_t>(imu.get_heading());
+  return Kp * e;
 }
 
 #endif

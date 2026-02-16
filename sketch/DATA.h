@@ -1,6 +1,8 @@
 #ifndef DATA_H
 #define DATA_H
 
+#include <Arduino.h>
+
 class DATA {
 public:
     DATA();
@@ -9,8 +11,8 @@ public:
                    float latitude,
                    float longitude,
                    uint16_t heading,
-                   uint16_t rudder_angle,
-                   uint16_t awa,
+                   int16_t rudder_angle,
+                   int16_t awa,
                    bool unmanned_status);
 };
 
