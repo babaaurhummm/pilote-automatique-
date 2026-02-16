@@ -26,7 +26,7 @@ constexpr uint16_t PIN_WINDSENSOR = A0;
 constexpr uint16_t PIN_RUDDER_ADC = A1;
 constexpr uint16_t RUDDER_CHANNEL = 0;
 
-constexpr float Kp = 1.0f;
+constexpr int16_t Kp = 1;
 
 constexpr uint16_t loop_frequency_hz = 25;
 static_assert(loop_frequency_hz >= 20 && loop_frequency_hz <= 50,
@@ -35,8 +35,8 @@ static_assert(loop_frequency_hz >= 20 && loop_frequency_hz <= 50,
 constexpr bool full_unmanned_mode = false ;
 constexpr bool awa_follow_mode = false; //true : suivi de d'allure ; false : suivi de cap
 
-constexpr uint16_t heading_sp = 0.0f ;
-constexpr uint16_t awa_sp = 0.0f ;
+constexpr uint16_t heading_sp = 0;
+constexpr uint16_t awa_sp = 0;
 
 
 #endif

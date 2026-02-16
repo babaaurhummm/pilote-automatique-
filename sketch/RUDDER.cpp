@@ -10,7 +10,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 RUDDER::RUDDER() {
   rudder_angle = 0;
   ADC_rudder_value = ADC_rudder_center;
-  k = 2.0f * rudder_max_angle / ADC_rudder_range;
+  k = static_cast<int16_t>(2 * rudder_max_angle);
 }
 
 
@@ -19,10 +19,10 @@ void RUDDER::init() {
   Monitor.println("Initializating Adafruit Servo Shield...");
 
   pwm.begin();
-  pwm.setPWMFreq(50);  
+  pwm.setPWMFreq(50);
 
   test_rudder_servo();
-  
+
   delay(10);
 }
 
@@ -42,12 +42,23 @@ void RUDDER::test_rudder_servo(){
 
 void RUDDER::update(){
   ADC_rudder_value = analogRead(PIN_RUDDER_ADC);
-  rudder_angle = k * (ADC_rudder_value - ADC_rudder_center);
+
+  const int32_t delta = static_cast<int32_t>(ADC_rudder_value) - ADC_rudder_center;
+  int32_t angle = delta * static_cast<int32_t>(k);
+
+  if (angle >= 0) {
+    angle += ADC_rudder_range / 2;
+  } else {
+    angle -= ADC_rudder_range / 2;
+  }
+
+  rudder_angle = static_cast<int16_t>(angle / ADC_rudder_range);
 }
 
-float RUDDER::get_rudder_angle() {
+int16_t RUDDER::get_rudder_angle() {
   return rudder_angle;
 }
+
 void RUDDER::set_rudder_angle(int angle){
   int max_angle = static_cast<int>(rudder_max_angle);
   int pulse = map(angle, -max_angle, max_angle, min_pulse_rudder, max_pulse_rudder);

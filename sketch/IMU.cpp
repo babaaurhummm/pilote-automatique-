@@ -4,7 +4,7 @@
 #include "IMU.h"
 
 IMU::IMU() {
-    heading = 0.0f;
+    heading = 0u;
     configured = false;
 }
 
@@ -33,12 +33,20 @@ void IMU::update() {
 
     if (bno08x.getSensorEvent(&sensorValue)) {
         if (sensorValue.sensorId == SH2_MAGNETIC_FIELD_CALIBRATED) {
-            float x = sensorValue.un.magneticField.x;
-            float y = sensorValue.un.magneticField.y;
-            heading = atan2(y, x) * 180.0f / PI;
-            if (heading < 0.0f) {
-                heading += 360.0f;
+            const float x = sensorValue.un.magneticField.x;
+            const float y = sensorValue.un.magneticField.y;
+            const float heading_f = atan2f(y, x) * 180.0f / PI;
+
+            int16_t heading_i = static_cast<int16_t>(heading_f + 0.5f);
+            if (heading_i < 0) {
+                heading_i += 360;
             }
+
+            if (heading_i >= 360) {
+                heading_i -= 360;
+            }
+
+            heading = static_cast<uint16_t>(heading_i);
         }
     }
 }

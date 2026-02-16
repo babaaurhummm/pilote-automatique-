@@ -10,25 +10,24 @@ WINDSENSOR::WINDSENSOR() {
 
 
 void WINDSENSOR::init() {
-    delay(5000) ;
+    delay(5000);
     Monitor.println("Initializating WindSensor (20 sec max)");
     Monitor.println("--> Put the WindSensor in motion");
-       
+
     unsigned long startTime = millis();
 
     while (millis() - startTime < 20000) { //20sec
         Monitor.println(analogRead(PIN_WINDSENSOR));
         delay(50); // lecture toutes les 50 ms
     }
-
 }
 
 
 void WINDSENSOR::update() {
     ADC_awa_value = analogRead(PIN_WINDSENSOR);
 
-    uint32_t tmp = (uint32_t)ADC_awa_value * 360u + 511u; //calcul temporaire pour optimiser
-    awa = (uint16_t)(tmp / 1023u);
+    uint32_t tmp = static_cast<uint32_t>(ADC_awa_value) * 360u + 511u;
+    awa = static_cast<uint16_t>(tmp / 1023u);
 
     if (awa >= 360u) {
         awa = 359u;
