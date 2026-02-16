@@ -9,18 +9,19 @@ COM::COM() {
 }
 
 void COM::init() {
+  delay(10000);
   Monitor.println("Initializing Communication...");
 
   pinMode(PIN_COM_RUDDER, INPUT);
   pinMode(PIN_MODE_CONTROL, INPUT);
-
-  Monitor.println("Waiting for UNMANNED mode...");
+  delay(5000);
+  Monitor.println("Waiting for MANNED mode...");
 
   while (true) {
     mode_control_value = pulseIn(PIN_MODE_CONTROL, HIGH, 25000);
 
-    if (mode_control_value < pwm_mode_treshold) {
-      Monitor.println("UNMANNED mode detected.");
+    if (mode_control_value > pwm_mode_treshold) {
+      Monitor.println("MANNED mode detected.");
       break;
     }
   }
@@ -37,7 +38,7 @@ void COM::update() {
   }
 }
 
-int COM::get_com_rudder() {
+uint16_t COM::get_com_rudder() {
   return rudder_value;
 }
 

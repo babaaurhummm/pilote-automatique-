@@ -10,8 +10,6 @@ IMU::IMU() {
 
 bool IMU::init() {
     Monitor.println("Initializating IMU (BNO085)");
-
-    Wire1.begin();
     if (!bno08x.begin_I2C(BNO08x_I2CADDR_DEFAULT,&Wire1)) {
         Monitor.println("BNO085 non detecte");
         configured = false;
@@ -45,6 +43,6 @@ void IMU::update() {
     }
 }
 
-float IMU::get_heading() {
+uint16_t IMU::get_heading() {
     return heading;
 }

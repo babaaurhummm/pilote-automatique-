@@ -8,7 +8,7 @@
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 RUDDER::RUDDER() {
-  rudder_angle = 0.0f;
+  rudder_angle = 0;
   ADC_rudder_value = ADC_rudder_center;
   k = 2.0f * rudder_max_angle / ADC_rudder_range;
 }

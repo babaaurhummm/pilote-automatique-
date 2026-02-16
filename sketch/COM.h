@@ -6,12 +6,12 @@ public:
     COM();
     void init();
     void update();
-    int get_com_rudder();
+    uint16_t get_com_rudder();
     bool is_unmanned();
 private:
-    int rudder_value;
-    int mode_control_value;
-    int get_mode_control_value();
+    uint16_t rudder_value;
+    uint16_t mode_control_value;
+    uint16_t get_mode_control_value();
     bool unmanned_status = false;
 };
 

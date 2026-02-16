@@ -14,7 +14,6 @@ void DATA::save_data(unsigned long timestamp,
                      float heading,
                      float rudder_angle,
                      float awa,
-                     float filtered_awa,
                      bool unmanned_status) {
     Bridge.notify("log_data",
                   timestamp,
@@ -23,6 +22,5 @@ void DATA::save_data(unsigned long timestamp,
                   heading,
                   rudder_angle,
                   awa,
-                  filtered_awa,
                   unmanned_status);
 }

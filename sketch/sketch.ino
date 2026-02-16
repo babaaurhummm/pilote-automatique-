@@ -43,9 +43,9 @@ void loop() {
 #else
 
 void setup() {
-  delay(20000);
-  Monitor.begin();
   Bridge.begin();
+  Monitor.begin();
+  delay(1000);
   com.init();
   imu.init();
   gps.init();
@@ -87,16 +87,15 @@ void save_data() {
   GPScoord point = gps.get_point();
   float heading = imu.get_heading();
   float r_angle = rudder.get_rudder_angle();
-  float awa = windsensor.get_awa();
-  float f_awa = windsensor.get_filtered_awa();
+  uint16_t awa = windsensor.get_awa();
   bool unmanned_status = com.is_unmanned();
-  data.save_data(millis(), point.lat, point.lng, heading, r_angle, awa, f_awa, unmanned_status);
+  data.save_data(millis(), point.lat, point.lng, heading, r_angle, awa, unmanned_status);
 }
 
 #if awa_follow_mode
 
 int rudder_angle_sp(int awa_sp) {
-  const float awa = windsensor.get_filtered_awa();
+  const uint16_t awa = windsensor.get_awa();
   const float heading = imu.get_heading();
   const float heading_sp = awa_sp - awa + heading ;
   const float e = heading_sp - heading ;
