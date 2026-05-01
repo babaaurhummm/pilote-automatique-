@@ -35,6 +35,6 @@ void WINDSENSOR::update() {
 }
 
 
-int16_t WINDSENSOR::get_awa() {
+uint16_t WINDSENSOR::get_awa() {
   return awa;
 }
